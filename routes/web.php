@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\PostController;
-use App\Models\Category;
-use App\Models\User;
 use App\Models\Post;
+use App\Models\User;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +52,8 @@ Route::get('/authors/{author:username}', function(User $author){
     ]);
 });
 
+Route::get('/login',[LoginController::class, 'index']);
+Route::get('/register',[RegisterController::class, 'index']);
 
 // Route::get('/authors/{user}', function(User $user) {
 //     return view('posts', [

@@ -8,8 +8,8 @@
         <button class="btn btn-outline-info" type="submit">Search</button>
       </form>
       <div class="buttons d-flex gap-3">
-        <button type="button" class="btn btn-success">Login</button>
-        <button type="button" class="btn btn-success">Register</button>
+        <a class="btn btn-success" href="/login/" role="button">Login</a>
+        <a class="btn btn-success" href="/register/" role="button">Register</a>
         <a class="btn btn-danger" href="/categories/" role="button">Category</a>
       </div>
     </div>
