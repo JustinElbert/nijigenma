@@ -18,11 +18,22 @@ class LoginController extends Controller
             'email' => 'required|email:dns',
             'password' => 'required'
         ]);
+
         if(auth::attempt($credentials)){
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/profile');
         }
+
         return back()->with('failed','Login Failed');
-        dd('berhasil login');
+    }
+
+    public function logout(Request $request){
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+        
+        return redirect("/");
     }
 }
