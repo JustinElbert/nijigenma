@@ -8,6 +8,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +37,6 @@ Route::post('/register',[RegisterController::class, 'store']);
 
 Route::get('/profile', [ProfileController::class,'index'])->middleware('auth');
 
-
 // halaman single post
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
@@ -64,7 +64,7 @@ Route::get('/authors/{author:username}', function(User $author){
     ]);
 });
 
-
+Route::resource('/profile/posts', DashboardPostController::class)->middleware('auth');
 
 // Route::get('/authors/{user}', function(User $user) {
 //     return view('posts', [
