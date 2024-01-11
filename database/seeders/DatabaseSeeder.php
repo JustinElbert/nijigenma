@@ -36,14 +36,16 @@ class DatabaseSeeder extends Seeder
             // 'name' => 'Daniel Christian',
             'username' => 'Dece',
             'email' => 'dchrist@gmail.com',
-            'password' => bcrypt('12345')
+            'password' => bcrypt('12345'),
+            'src'=> 'default.png'
         ]);
 
         User::create([
             // 'name' => 'Mathew Marcellino',
             'username' => 'Memet',
             'email' => 'matmarcel@gmail.com',
-            'password' => bcrypt('12345')
+            'password' => bcrypt('12345'),
+            'src'=> 'default.png'
         ]);
 
         Category::create([
