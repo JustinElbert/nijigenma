@@ -4,9 +4,11 @@
   height: 1rem;
 }
 
+
 /*
  * Sidebar
  */
+
 
 @media (min-width: 768px) {
   .sidebar .offcanvas-lg {
