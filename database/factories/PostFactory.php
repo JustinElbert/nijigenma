@@ -21,7 +21,7 @@ class PostFactory extends Factory
             'slug' => $this->faker->slug(),
             'excerpt' => $this->faker->paragraph(mt_rand(1,2)),
             'body' => $this->faker->paragraph(mt_rand(2,5)),
-            'src' => $this->faker->imageUrl(), // Image Dummy Faker
+            'src' => "assets/postdefault.png", // Image Dummy Faker
             // 'src' => "https://source.unsplash.com/1200x800/?japan", //unsplash API
             // 'src' => "assets/nijigenmaLogo.png", // Img Source dari asset
             'user_id' => mt_rand(1, 3),

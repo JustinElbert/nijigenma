@@ -137,7 +137,7 @@
 
                         <div class="card d-flex">
                             {{-- <img src="https://source.unsplash.com/1200x800/?japan" class="card-img-top" alt="..."> --}}
-                            <img src="{{ $post->src }}" class="card-img-top" alt="...">
+                            <img src="/{{ $post->src }}" class="card-img-top" alt="...">
                             <div class="card-body">
                             <h5 class="card-title">
                                 <a href="/posts/{{ $post->slug }}" class="text-decoration-none text-dark">{{ $post->title }}</a>
