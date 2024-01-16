@@ -15,7 +15,7 @@
             Welcome back, {{ auth()->user()->username }}
             </a>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/profile/">Profile</a></li>
+                <li><a class="dropdown-item" href="/dashboard/">Profile</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li>
                     <form action="/logout" method="post">

@@ -48,3 +48,10 @@
 .navbar .form-control {
   padding: .75rem 1rem;
 }
+
+.card-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 25ch;
+}

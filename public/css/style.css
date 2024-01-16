@@ -19,3 +19,10 @@
     border-radius: 0;
     margin-bottom: -1px;
   }
+
+.card-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 25ch;
+}
