@@ -22,10 +22,11 @@ class PostFactory extends Factory
             'excerpt' => $this->faker->paragraph(mt_rand(1,2)),
             'body' => $this->faker->paragraph(mt_rand(2,5)),
             'src' => "assets/postdefault.png", // Image Dummy Faker
-            // 'src' => "https://source.unsplash.com/1200x800/?japan", //unsplash API
-            // 'src' => "assets/nijigenmaLogo.png", // Img Source dari asset
+            'price' => 100000,
             'user_id' => mt_rand(1, 3),
             'category_id' => mt_rand(1, 3)
         ];
     }
 }
+// 'src' => "https://source.unsplash.com/1200x800/?japan", //unsplash API
+// 'src' => "assets/nijigenmaLogo.png", // Img Source dari asset

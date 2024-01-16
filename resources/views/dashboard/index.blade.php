@@ -18,7 +18,7 @@
   </head>
   <body>
 
-<header class="navbar sticky-top flex-md-nowrap p-0 shadow " style="background-color: #566680" data-bs-theme="dark">
+<header class="navbar sticky-top flex-md-nowrap p-0 shadow " style="background-color: #E5E4E2" data-bs-theme="dark">
   <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="/">
     <img src="{{ asset('assets/nijigenmaLogo.png') }}" alt="Bootstrap" width="160" height="40">
   </a>
@@ -26,7 +26,7 @@
     <div class="nav-item text-nowrap">
         <form action="/logout" method="post">
             @csrf
-            <button type="submit" class="nav-link px-3 border-0">Logout</button>
+            <button type="submit" class="nav-link px-3 border-0 text-black">Logout</button>
         </form>
     </div>
   </div>

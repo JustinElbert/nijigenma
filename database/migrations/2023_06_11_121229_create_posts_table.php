@@ -23,6 +23,7 @@ return new class extends Migration
             // $table->string('artist');
             $table->string('excerpt');
             $table->text('body');
+            $table->unsignedInteger('price');
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });

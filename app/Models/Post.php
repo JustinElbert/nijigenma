@@ -9,7 +9,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title','category_id', 'user_id','slug','src','excerpt','body'];
+    protected $fillable = ['title','category_id', 'user_id','slug','src','excerpt','body','price'];
     protected $with = ['category', 'author'];
 
     public function category(){
@@ -23,5 +23,11 @@ class Post extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function getPriceAttribute($value)
+    {
+        // Assuming you want to display the price with commas as thousand separators
+        return number_format($value, 0, ',', '.');
     }
 }
