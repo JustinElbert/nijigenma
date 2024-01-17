@@ -18,7 +18,7 @@
   </head>
   <body>
 
-<header class="navbar sticky-top flex-md-nowrap p-0 shadow " style="background-color: #566680" data-bs-theme="dark">
+<header class="navbar sticky-top flex-md-nowrap p-0 shadow " style="background-color: #E5E4E2" data-bs-theme="dark">
   <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="/">
     <img src="{{ asset('assets/nijigenmaLogo.png') }}" alt="Bootstrap" width="160" height="40">
   </a>
@@ -26,7 +26,7 @@
     <div class="nav-item text-nowrap">
         <form action="/logout" method="post">
             @csrf
-            <button type="submit" class="nav-link px-3 border-0">Logout</button>
+            <button type="submit" class="nav-link px-3 border-0 text-black">Logout</button>
         </form>
     </div>
   </div>
@@ -75,18 +75,28 @@
             @csrf
             <div class="mb-3">
               <label for="title" class="form-label">Title</label>
-              <input type="text" class="form-control" id="title" name="title">
+              <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" required autofocus value="{{old('title')}}">
+              @error('title')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+              @enderror
             </div>
             <div class="mb-3">
                 <label for="slug" class="form-label">Slug</label>
-                <input type="text" class="form-control" id="slug" name="slug">
+                <input type="text" class="form-control @error('title') is-invalid @enderror" id="slug" name="slug" value="{{old('slug')}}" required>
+                @error('slug')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="category" class="form-label">Category</label>
                 <select class="form-select" id="category" name="category">
                     <option value="" disabled selected>Select a category</option>
                     @foreach($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                      <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -95,8 +105,25 @@
                 <input type="file" class="form-control" id="image" name="image">
             </div>
             <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" name="description" rows="4"></textarea>
+              <label for="price" class="form-label">Price (IDR)</label>
+              <div class="input-group">
+                <span class="input-group-text">Rp</span>
+                <input type="number" class="form-control @error('price') is-invalid @enderror" id="price" name="price" min="100" step="100" placeholder="0" required>
+                @error('price')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
+              </div>
+            </div>
+            <div class="mb-3">
+                <label for="body" class="form-label">Description</label>
+                <textarea class="form-control @error('body') is-invalid @enderror" id="body" name="body" rows="4">{{ old('body') }}</textarea>
+                @error('body')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
             </div>
             <button type="submit" class="btn btn-primary">Create Post</button>
           </form>
