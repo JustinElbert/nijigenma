@@ -36,6 +36,7 @@ Route::get('/register',[RegisterController::class, 'index'])->middleware('guest'
 Route::post('/register',[RegisterController::class, 'store']);
 
 Route::get('/dashboard', [DashboardController::class,'index'])->middleware('auth');
+Route::get('/dashboard/viewEditProfile', [DashboardController::class,'viewEditProfile'])->middleware('auth');
 
 // halaman single post
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
@@ -64,7 +65,7 @@ Route::get('/authors/{author:username}', function(User $author){
     ]);
 });
 
-
+Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
 
 // Route::get('/authors/{user}', function(User $user) {

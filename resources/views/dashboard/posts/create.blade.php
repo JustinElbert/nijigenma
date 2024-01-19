@@ -71,11 +71,11 @@
       </div>
 
       <div class="col-lg-8">
-        <form method="post" action="/dashboard/posts">
+        <form method="post" action="/dashboard/posts" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
               <label for="title" class="form-label">Title</label>
-              <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" required autofocus value="{{old('title')}}">
+              <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" autofocus value="{{old('title')}}" required>
               @error('title')
                 <div class="invalid-feedback">
                   {{ $message }}
@@ -84,7 +84,7 @@
             </div>
             <div class="mb-3">
                 <label for="slug" class="form-label">Slug</label>
-                <input type="text" class="form-control @error('title') is-invalid @enderror" id="slug" name="slug" value="{{old('slug')}}" required>
+                <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" value="{{old('slug')}}" required>
                 @error('slug')
                   <div class="invalid-feedback">
                     {{ $message }}
@@ -92,8 +92,8 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="category" class="form-label">Category</label>
-                <select class="form-select" id="category" name="category">
+                <label for="category_id" class="form-label">Category</label>
+                <select class="form-select" id="category_id" name="category_id">
                     <option value="" disabled selected>Select a category</option>
                     @foreach($categories as $category)
                       <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -101,8 +101,13 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label for="image" class="form-label">Image</label>
-                <input type="file" class="form-control" id="image" name="image">
+                <label for="src" class="form-label">Image</label>
+                <input type="file" class="form-control @error('src') is-invalid @enderror" id="src" name="src">
+                @error('src')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
             </div>
             <div class="mb-3">
               <label for="price" class="form-label">Price (IDR)</label>
@@ -139,6 +144,15 @@
     <script src="/js/dashboard.js"></script>
     <script>
       feather.replace();
+
+      const title = document.querySelector('#title');
+      const slug = document.querySelector('#slug');
+
+      title.addEventListener('change', function(){
+        fetch('/dashboard/posts/checkSlug?title=' + title.value)
+          .then(response => response.json())
+          .then(data => slug.value = data.slug)
+      });
     </script>
 </body>
 </html>
