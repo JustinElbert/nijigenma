@@ -17,6 +17,8 @@
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="/dashboard/">Profile</a></li>
                 <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="/cart/">Cart</a></li>
+                <li><hr class="dropdown-divider"></li>
                 <li>
                     <form action="/logout" method="post">
                         @csrf

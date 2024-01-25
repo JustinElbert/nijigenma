@@ -26,3 +26,28 @@
     text-overflow: ellipsis;
     max-width: 25ch;
 }
+
+.artistIcon{
+  display: flex;
+  flex-direction: row;
+  align-content: end;
+  font-size: large;
+  position:absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.artistIcon img{
+  max-width: 5rem;
+  border-radius: 5rem;
+}
+
+.col-4{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  position: relative;
+  text-align: justify;
+}
+

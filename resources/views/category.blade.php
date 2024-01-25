@@ -8,7 +8,7 @@
         <div class="col">
             <article class="mb-5">
             <div class="card d-flex p-2" style="max-width: 18rem;">
-                <img src="/{{ $post->src }}" class="card-img-top" alt="...">
+                <img src="{{ $post->src }}" class="card-img-top" alt="...">
                 <div class="card-body">
                 <h5 class="card-title">
                     <a href="/posts/{{ $post->slug }}" class="text-decoration-none text-secondary">{{ $post->title }}</a>

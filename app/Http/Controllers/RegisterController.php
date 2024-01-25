@@ -27,7 +27,7 @@ class RegisterController extends Controller
         $user->username = $validatedData['username'];
         $user->email = $validatedData['email'];
         $user->password = bcrypt($validatedData['password']);
-        $user->src = $validatedData['src'] ?? 'default.png';
+        $user->src = $validatedData['src'] ?? '/assets/default.png';
 
         $user->save();
         

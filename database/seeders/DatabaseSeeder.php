@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'Elbert', 
             'email' => 'jelbert@gmail.com',
             'password' => bcrypt('12345'),
-            'src'=> 'default.png'
+            'src'=> '/assets/default.png'
         ]);
 
         User::create([
@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'Dece',
             'email' => 'dchrist@gmail.com',
             'password' => bcrypt('12345'),
-            'src'=> 'default.png'
+            'src'=> '/assets/default.png'
         ]);
 
         User::create([
@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'Memet',
             'email' => 'matmarcel@gmail.com',
             'password' => bcrypt('12345'),
-            'src'=> 'default.png'
+            'src'=> '/assets/default.png'
         ]);
 
         Category::create([

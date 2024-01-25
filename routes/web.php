@@ -9,7 +9,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardPostController;
-
+use App\Http\Controllers\CartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -69,9 +69,10 @@ Route::get('/authors/{author:username}', function(User $author){
 Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
 
-// Route::get('/authors/{user}', function(User $user) {
-//     return view('posts', [
-//         'title' => 'All Posts by '.$user->name.' :',
-//         'posts' => $user->posts,
-//     ]);
-// });
+
+// index(view), addtocart, removefromcart
+Route::get('/cart',[CartController::class,'index'])->middleware('auth');
+
+Route::post('/cart/{productId}', [CartController::class,'addToCart'])->name('addToCart');
+Route::delete('/remove-from-cart/{postId}', [CartController::class, 'removeFromCart'])
+    ->name('removeFromCart');
