@@ -75,55 +75,38 @@
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Edit Post</h1>
+                    <h1 class="h2">Edit Profile</h1>
                     <div class="bg-success rounded" style="padding: 0.5rem">
-                        <a href="/dashboard/posts" style="text-decoration: none">
-                            <div class="text-center text-white">Back to My Posts</div>
+                        <a href="/dashboard" style="text-decoration: none">
+                            <div class="text-center text-white">Back to My Profile</div>
                         </a>
                     </div>
                 </div>
 
                 <div class="col-lg-8">
-                    <form method="post" action="/dashboard/posts/{{ $post->slug }}" enctype="multipart/form-data">
+                    <form method="post" action="/dashboard/editProfile/{{ auth()->user()->id }}" enctype="multipart/form-data">
                         @method('put')
                         @csrf
                         <div class="mb-3">
-                            <label for="title" class="form-label">Title</label>
-                            <input type="text" class="form-control @error('title') is-invalid @enderror"
-                                id="title" name="title" required autofocus
-                                value="{{ old('title', $post->title) }}">
-                            @error('title')
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control @error('username') is-invalid @enderror"
+                                id="username" name="username" required autofocus
+                                value="{{ old('username', $user->username) }}">
+                            @error('username')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="slug" class="form-label">Slug</label>
-                            <input type="text" class="form-control @error('slug') is-invalid @enderror"
-                                id="slug" name="slug" value="{{ old('slug', $post->slug) }}" required>
-                            @error('slug')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="category_id" class="form-label">Category</label>
-                            <select class="form-select" id="category_id" name="category_id">
-                                <option value="" disabled selected>Select a category</option>
-                                @foreach ($categories as $category)
-                                    @if (old('category_id', $post->category_id) == $category->id)
-                                        <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
-                                    @else
-                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
+                            <label for="email" class="form-label">Email</label>
+                            <input type="text" class="form-control"
+                                id="email" name="email" value="{{ old('email', $user->email) }}" disabled>
                         </div>
                         <div class="mb-3">
                             <label for="src" class="form-label">Image</label>
-                            <input type="file" class="form-control @error('src') is-invalid @enderror" id="src" name="src">
+                            <input type="file" class="form-control @error('src') is-invalid @enderror" id="src"
+                                name="src">
                             @error('src')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -131,29 +114,22 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="price" class="form-label">Price (IDR)</label>
-                            <div class="input-group">
-                                <span class="input-group-text">Rp</span>
-                                <input type="number" class="form-control @error('price') is-invalid @enderror"
-                                    id="price" name="price" min="100" step="100" placeholder="0"
-                                    value="{{ old('price', $post->price) }}" required>
-                                @error('price')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="body" class="form-label">Description</label>
-                            <textarea class="form-control @error('body') is-invalid @enderror" id="body" name="body" rows="4">{{ old('body', $post->body) }}</textarea>
-                            @error('body')
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                id="password" name="password">
+                            @error('password')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-warning">Edit Post</button>
+                
+                        <!-- Confirm Password field -->
+                        <div class="mb-3">
+                            <label for="password_confirmation" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
+                        </div>
+                        <button type="submit" class="btn btn-warning">Edit Profile</button>
                         <div class="space" style="padding-bottom:1rem"></div>
                     </form>
                 </div>
@@ -168,15 +144,6 @@
     <script src="/js/dashboard.js"></script>
     <script>
         feather.replace();
-
-        const title = document.querySelector('#title');
-        const slug = document.querySelector('#slug');
-
-        title.addEventListener('change', function() {
-            fetch('/dashboard/posts/checkSlug?title=' + title.value)
-                .then(response => response.json())
-                .then(data => slug.value = data.slug)
-        });
     </script>
 </body>
 

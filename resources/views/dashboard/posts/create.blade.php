@@ -131,6 +131,7 @@
                 @enderror
             </div>
             <button type="submit" class="btn btn-primary">Create Post</button>
+            <div class="space" style="padding-bottom:1rem"></div>
           </form>
       </div>
       

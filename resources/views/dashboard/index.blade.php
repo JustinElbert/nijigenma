@@ -72,18 +72,24 @@
             </div>
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">Welcome Back, {{ auth()->user()->username }}</h1>
                 </div>
-                <img src="/assets/{{ auth()->user()->src }}" class="rounded float-start rounded-circle mx-auto p-2"
+                @if (session()->has('success'))
+                    <div class="alert alert-success col-lg-3" role="alert">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                <img src="{{ auth()->user()->src }}" class="rounded float-start rounded-circle mx-auto p-2"
                     style="width: 18rem" alt="...">
                 <p class="fs-2">Username</p>
                 <p>{{ auth()->user()->username }}</p>
                 <p class="fs-2">Email</p>
                 <p>{{ auth()->user()->email }}</p>
                 <button type="button" class="btn btn-warning" style="border: none; color: black;">
-                    <a href="/dashboard/viewEditProfile" style="text-decoration: none">
+                    <a href="/dashboard/editProfile" style="text-decoration: none">
                         <div class="text-center text-black">Edit Profile</div>
                     </a>
                   </button>

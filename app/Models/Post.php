@@ -35,6 +35,6 @@ class Post extends Model
 
     public function getPriceAttribute($value)
     {
-        return number_format($value, 0, ',', '.');
+        return 'Rp ' . number_format($value, 0, ',', '.');
     }
 }

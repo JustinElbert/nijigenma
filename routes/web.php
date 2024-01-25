@@ -36,7 +36,8 @@ Route::get('/register',[RegisterController::class, 'index'])->middleware('guest'
 Route::post('/register',[RegisterController::class, 'store']);
 
 Route::get('/dashboard', [DashboardController::class,'index'])->middleware('auth');
-Route::get('/dashboard/viewEditProfile', [DashboardController::class,'viewEditProfile'])->middleware('auth');
+Route::get('/dashboard/editProfile', [DashboardController::class,'viewEditProfile'])->middleware('auth');
+Route::put('/dashboard/editProfile/{user:id}', [DashboardController::class,'updateProfile'])->middleware('auth');
 
 // halaman single post
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
