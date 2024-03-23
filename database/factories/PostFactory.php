@@ -19,7 +19,7 @@ class PostFactory extends Factory
         return [
             'title' => $this->faker->sentence(mt_rand(2, 8)),
             'slug' => $this->faker->slug(),
-            'body' => $this->faker->paragraph(mt_rand(2,5)),
+            'body' => $this->faker->paragraph(mt_rand(2,4)),
             'src' => "/assets/postdefault.png", // Image Dummy Faker
             'price' => 100000,
             'user_id' => mt_rand(1, 3),

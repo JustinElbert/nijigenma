@@ -10,6 +10,8 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardPostController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -60,7 +62,7 @@ Route::get('/categories/{category:slug}', function(Category $category){
 Route::get('/authors/{author:username}', function(User $author){
     // dd($user->posts);
     return view('authors', [
-        'name'=> $author->name,
+        'username'=> $author->username,
         'title' => 'User Posts',
         'posts' => $author->posts->load('category','author')
     ]);
@@ -72,7 +74,8 @@ Route::resource('/dashboard/posts', DashboardPostController::class)->middleware(
 
 // index(view), addtocart, removefromcart
 Route::get('/cart',[CartController::class,'index'])->middleware('auth');
+Route::get('/carl',[CartController::class,'index2'])->middleware('auth');
 
 Route::post('/cart/{productId}', [CartController::class,'addToCart'])->name('addToCart');
-Route::delete('/remove-from-cart/{postId}', [CartController::class, 'removeFromCart'])
-    ->name('removeFromCart');
+Route::delete('/remove-from-cart/{postId}', [CartController::class, 'removeFromCart'])->name('removeFromCart');
+Route::post('/checkout', [CartController::class,'checkout'])->name('checkout');

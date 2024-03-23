@@ -41,8 +41,13 @@
                     </div>
 
                     <div class="form-floating">
-                        <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
+                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Password" required>
                         <label for="floatingPassword">Password</label>
+                        @error('password')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                 <button class="btn btn-primary w-100 py-2" type="submit">Login</button>
                 </form>

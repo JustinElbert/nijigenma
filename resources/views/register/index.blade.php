@@ -13,16 +13,6 @@
 
                 <form action="/register" method="post" enctype="multipart/form-data">
                     @csrf
-                    {{-- <div class="form-floating">
-                    <input type="text" name="name" class="form-control rounded-top @error('name') is-invalid @enderror" id="name" placeholder="Name" required value="{{ old('name')}}">
-                    <label for="name">Name</label>
-                    @error('name')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-
-                </div> --}}
 
                     <div class="form-floating">
                         <input type="text" name="username" class="form-control @error('username') is-invalid @enderror"
