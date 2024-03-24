@@ -40,19 +40,20 @@
                             </form>
                         </div>
                     </div>
-                @endforeach
-                <hr>
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-md-2 text-center p-3 rounded">
-                            <form action="{{ route('checkout', $item['user_id']) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-danger btn-sm fs-5" style="width: 12rem;"
-                                    id="pay-button">Checkout</button>
-                            </form>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-2 text-center p-3 rounded">
+                                <form action="{{ route('checkout', 'orderId='.$item['orderId']) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger btn-sm fs-5" style="width: 12rem;"
+                                        id="pay-button">Checkout</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
+                <hr>
+                
             @else
                 <p class="fs-4 text-center">Your cart is empty.</p>
             @endif
@@ -60,5 +61,4 @@
         </div>
     </div>
 
-    <script src="js/script.js"></script>
 @endsection

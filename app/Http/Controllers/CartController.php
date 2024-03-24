@@ -20,7 +20,10 @@ class CartController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $cart = $user->cart;
+        $cart = Cart::where('user_id', $user->id)
+            ->where('status', 'Unpaid')->get();
+        // dd($cart);
+
 
         return view('cart.index', [
             'title' => 'Cart',
@@ -28,14 +31,14 @@ class CartController extends Controller
         ]);
     }
 
-    public function index2()
-    {
-        $user = auth()->user();
+    // public function index2()
+    // {
+    //     $user = auth()->user();
 
-        return view('cart.carl', [
-            'title' => 'Cart',
-        ]);
-    }
+    //     return view('cart.carl', [
+    //         'title' => 'Cart',
+    //     ]);
+    // }
 
     public function addToCart(Request $request, $postId)
     {
@@ -49,18 +52,22 @@ class CartController extends Controller
         $user = auth()->user();
 
         // Create or update a cart item for the user
+        $cartOrderId = $this->orderId;
+
         $cartItems = Cart::updateOrCreate(
-            ['user_id' => $user->id, 'post_id' => $postId], 
+            ['user_id' => $user->id, 'post_id' => $postId, 'status' => 'Unpaid'], 
             [
                 'src' => $post->src,
                 'title' => $post->title,
-                'price' => $post->price
+                'price' => $post->price,
+                'orderId' => $cartOrderId
             ]
         );
 
-        $cartItems = Cart::where('user_id', $user->id)->get();
+        $cartItems = Cart::where('user_id', $user->id)
+                            ->where('status', 'Unpaid')->get();
 
-        return redirect()->back()->with('success', 'Post added to cart successfully');
+        return view('cart.index', compact('cartItems'));
     }
 
     public function removeFromCart(Request $request, $postId)
@@ -80,11 +87,13 @@ class CartController extends Controller
     }
 
     public function checkout(Request $request){
+        // dd($request);
+        // $cart = new Cart();
         $request->request->add(['status' => 'unpaid']);
         $user = auth()->user();
-        $total_price = Cart::where("user_id", $user->id)->sum("price");
-        $cartItems = Cart::where('user_id', auth()->id())->get();
-
+        $total_price =  Cart::where('user_id', $user->id)
+                            ->where('status', 'Unpaid')->sum("price");
+        $cartItems = Cart::where('user_id', auth()->id())->where('status', 'Unpaid')->get();
         //SAMPLE REQUEST START HERE
         
         // Set your Merchant Server Key
@@ -98,7 +107,7 @@ class CartController extends Controller
 
         $params = array(
             'transaction_details' => array(
-                'order_id' => $this->orderId,
+                'order_id' => $request->orderId,
                 'gross_amount' => $total_price,
             ),
             'customer_details' => array(
@@ -106,37 +115,32 @@ class CartController extends Controller
                 'email' => $user->email,
             ),
         );
-        
+
         // dd($params);
         $snapToken = \Midtrans\Snap::getSnapToken($params);
         // dd($params);
-        // dd($snapToken);
         return view('cart.checkout', compact('snapToken','cartItems','total_price'));
     }
 
-    public function checkout_data(Request $request){
-        $user = auth()->user();
-        $total_price = Cart::where("user_id", $user->id)->sum("price");
+    // public function checkout_data(Request $request){
+    //     $user = auth()->user();
+    //     $total_price = Cart::where("user_id", $user->id)->sum("price");
 
-        return view('cart.checkout', [
-            'title' => 'Cart',
-            'total_price' => $total_price,
-        ]);
-    }
+    //     return view('cart.checkout', [
+    //         'title' => 'Cart',
+    //         'total_price' => $total_price,
+    //     ]);
+    // }
 
 
     public function callback(Request $request){
         // dd($request);
         $serverKey = config('midtrans.server_key');
         $hashed = hash("sha512", $request->order_id.$request->status_code.$request->gross_amount.$serverKey); 
-        // dd($this->orderId);
-        $temp = $this->orderId;
-        // $order = Cart::find($request->order_id);
         
         if($hashed == $request->signature_key){
             if($request->transaction_status == 'capture'){
-                $order = Cart::find($temp);
-                // $order->update(['orderId' => $temp]);
+                $order = Cart::where('orderId', $request->order_id);
                 $order->update(['status' => 'Paid']);
             }
         }

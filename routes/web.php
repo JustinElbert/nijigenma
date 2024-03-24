@@ -76,6 +76,7 @@ Route::resource('/dashboard/posts', DashboardPostController::class)->middleware(
 Route::get('/cart',[CartController::class,'index'])->middleware('auth');
 Route::get('/carl',[CartController::class,'index2'])->middleware('auth');
 
-Route::post('/cart/{productId}', [CartController::class,'addToCart'])->name('addToCart');
+Route::post('/cart/{postId}', [CartController::class,'addToCart'])->name('addToCart');
 Route::delete('/remove-from-cart/{postId}', [CartController::class, 'removeFromCart'])->name('removeFromCart');
 Route::post('/checkout', [CartController::class,'checkout'])->name('checkout');
+// Route::post('/checkout', [CartController::class,'callback']);
