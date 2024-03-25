@@ -67,6 +67,12 @@
                                     Commissions
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2" href="/transaction">
+                                    <span class="text-black" data-feather="shopping-bag"></span>
+                                    Transactions
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>

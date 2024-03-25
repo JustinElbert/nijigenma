@@ -54,8 +54,8 @@
                     <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2 text-black active"
-                                    aria-current="page" href="/dashboard">
+                                <a class="nav-link d-flex align-items-center gap-2 " aria-current="page"
+                                    href="/dashboard">
                                     <span class="text-black" data-feather="user"></span>
                                     Profile
                                 </a>
@@ -67,7 +67,8 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="/transaction">
+                                <a class="nav-link d-flex align-items-center gap-2 text-black active"
+                                    href="/transaction">
                                     <span class="text-black" data-feather="shopping-bag"></span>
                                     Transactions
                                 </a>
@@ -78,37 +79,59 @@
             </div>
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">Welcome Back, {{ auth()->user()->username }}</h1>
                 </div>
-                @if (session()->has('success'))
-                    <div class="alert alert-success col-lg-3" role="alert">
-                        {{ session('success') }}
+
+
+                <div class="container my-3">
+                    <h2 class="fs-2 fw-bold text-center" style="padding-bottom: 1.5rem">Transaction History</h2>
+                    <hr>
+                    <div class="container mt-3">
+                        <div class="row justify-content-center" style="margin-left: 100px;">
+                            <div class="col-md-3">
+                                <p class="fs-5 fw-bold text-center">Picture</p>
+                            </div>
+                            <div class="col-md-4">
+                                <p class="fs-5 fw-bold text-center">Description</p>
+                            </div>
+                            <div class="col-md-2">
+                                <p class="fs-5 fw-bold text-center">Status</p>
+                            </div>
+                            <div class="col-md-2">
+                                {{-- <p class="fs-5 fw-bold text-center">Cancel</p> --}}
+                            </div>
+                        </div>
+                        @foreach ($cartItems as $item)
+                            <div class="row align-items-center mb-2 justify-content-center"
+                                style="padding-right:8rem; margin-left: 100px;">
+                                <div class="col-md-2 text-center">
+                                    <p class="fs-4">{{$item->user->username}}</p>
+                                </div>
+                                <div class="col-md-3 mr-md-4 text-md-start">
+                                    <img src="{{ $item['src'] }}" class="img-fluid"
+                                        style="max-width: 15rem; margin-left: -55px;" alt="{{ $item['title'] }}">
+                                </div>
+                                <div class="col-md-4" style="padding-top:1rem;">
+                                    <p class="fs-4">{{ $item['title'] }}</p>
+                                </div>
+                                <div class="col-md-2 text-center" style="padding-top:1rem; margin-left:20px">
+                                    <p class="fs-4">{{ $item['status'] }}</p>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                @endif
-                <img src="{{ auth()->user()->src }}" class="rounded float-start rounded-circle mx-auto p-2"
-                    style="width: 18rem" alt="...">
-                <p class="fs-2">Username</p>
-                <p>{{ auth()->user()->username }}</p>
-                <p class="fs-2">Email</p>
-                <p>{{ auth()->user()->email }}</p>
-                <button type="button" class="btn btn-warning" style="border: none; color: black;">
-                    <a href="/dashboard/editProfile" style="text-decoration: none">
-                        <div class="text-center text-black">Edit Profile</div>
-                    </a>
-                </button>
+                </div>
+
             </main>
 
-        </div>
-    </div>
-    {{-- <script src="../assets/dist/js/bootstrap.bundle.min.js"></script> --}}
 
-    <script src="/js/dashboard.js"></script>
-    <script>
-        feather.replace();
-    </script>
+
+            <script src="/js/dashboard.js"></script>
+            <script>
+                feather.replace();
+            </script>
 </body>
 
 </html>

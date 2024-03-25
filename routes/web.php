@@ -11,6 +11,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardPostController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,9 +75,11 @@ Route::resource('/dashboard/posts', DashboardPostController::class)->middleware(
 
 // index(view), addtocart, removefromcart
 Route::get('/cart',[CartController::class,'index'])->middleware('auth');
-Route::get('/carl',[CartController::class,'index2'])->middleware('auth');
 
 Route::post('/cart/{postId}', [CartController::class,'addToCart'])->name('addToCart');
 Route::delete('/remove-from-cart/{postId}', [CartController::class, 'removeFromCart'])->name('removeFromCart');
 Route::post('/checkout', [CartController::class,'checkout'])->name('checkout');
 // Route::post('/checkout', [CartController::class,'callback']);
+
+//show transaction page
+Route::get('/transaction',[TransactionController::class,'index'])->middleware('auth');

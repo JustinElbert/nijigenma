@@ -112,6 +112,7 @@ class CartController extends Controller
             ),
             'customer_details' => array(
                 'first_name' => $user->username,
+                'last_name' => '',
                 'email' => $user->email,
             ),
         );
@@ -139,7 +140,7 @@ class CartController extends Controller
         $hashed = hash("sha512", $request->order_id.$request->status_code.$request->gross_amount.$serverKey); 
         
         if($hashed == $request->signature_key){
-            if($request->transaction_status == 'capture'){
+            if($request->transaction_status == 'capture' or $request->transaction_status == 'settlement'){
                 $order = Cart::where('orderId', $request->order_id);
                 $order->update(['status' => 'Paid']);
             }

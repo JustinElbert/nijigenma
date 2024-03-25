@@ -20,7 +20,8 @@
                 </div>
             </div>
             @foreach ($cartItems as $item)
-                <div class="row align-items-center mb-2 justify-content-center" style="padding-right:8rem; margin-left: 100px;">
+                <div class="row align-items-center mb-2 justify-content-center"
+                    style="padding-right:8rem; margin-left: 100px;">
                     <div class="col-md-3 mr-md-4 text-md-start">
                         <img src="{{ $item['src'] }}" class="img-fluid" style="max-width: 15rem; margin-left: -55px;"
                             alt="{{ $item['title'] }}">
@@ -35,13 +36,13 @@
             @endforeach
             <hr>
             <div class="container">
-              <div class="row">
-                  <div class="col-md-12 text-center p-3 rounded">
-                      <p class="fs-5">Total Price: Rp. {{$total_price}}</p>
-                      <button class="btn btn-danger btn-sm fs-5" style="width: 12rem; " id="pay-button">Pay</button>
-                  </div>
-              </div>
-          </div>
+                <div class="row">
+                    <div class="col-md-12 text-center p-3 rounded">
+                        <p class="fs-5">Total Price: Rp. {{ $total_price }}</p>
+                        <button class="btn btn-danger btn-sm fs-5" style="width: 12rem; " id="pay-button">Pay</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
