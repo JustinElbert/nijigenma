@@ -21,6 +21,7 @@
             </div>
             @if (count($cartItems) > 0)
                 @foreach ($cartItems as $item)
+                <hr>
                     <div class="row align-items-center mb-2 justify-content-center">
                         <div class="col-md-3 text-center">
                             <img src="{{ $item['src'] }}" class="img-fluid" style="max-width: 15rem"

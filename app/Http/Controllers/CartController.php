@@ -123,16 +123,6 @@ class CartController extends Controller
         return view('cart.checkout', compact('snapToken','cartItems','total_price'));
     }
 
-    // public function checkout_data(Request $request){
-    //     $user = auth()->user();
-    //     $total_price = Cart::where("user_id", $user->id)->sum("price");
-
-    //     return view('cart.checkout', [
-    //         'title' => 'Cart',
-    //         'total_price' => $total_price,
-    //     ]);
-    // }
-
 
     public function callback(Request $request){
         // dd($request);

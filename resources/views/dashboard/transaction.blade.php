@@ -90,6 +90,9 @@
                     <hr>
                     <div class="container mt-3">
                         <div class="row justify-content-center" style="margin-left: 100px;">
+                            <div class="col-md-2">
+                                <p class="fs-5 fw-bold text-center">User</p>
+                            </div>
                             <div class="col-md-3">
                                 <p class="fs-5 fw-bold text-center">Picture</p>
                             </div>
@@ -99,24 +102,22 @@
                             <div class="col-md-2">
                                 <p class="fs-5 fw-bold text-center">Status</p>
                             </div>
-                            <div class="col-md-2">
-                                {{-- <p class="fs-5 fw-bold text-center">Cancel</p> --}}
-                            </div>
                         </div>
                         @foreach ($cartItems as $item)
+                        <hr>
                             <div class="row align-items-center mb-2 justify-content-center"
-                                style="padding-right:8rem; margin-left: 100px;">
-                                <div class="col-md-2 text-center">
+                                style="margin-left: 140px;">
+                                <div class="col-md-2" style="padding-left:1.5rem;">
                                     <p class="fs-4">{{$item->user->username}}</p>
                                 </div>
-                                <div class="col-md-3 mr-md-4 text-md-start">
+                                <div class="col-md-3" style="padding-left:3.5rem;">
                                     <img src="{{ $item['src'] }}" class="img-fluid"
                                         style="max-width: 15rem; margin-left: -55px;" alt="{{ $item['title'] }}">
                                 </div>
                                 <div class="col-md-4" style="padding-top:1rem;">
                                     <p class="fs-4">{{ $item['title'] }}</p>
                                 </div>
-                                <div class="col-md-2 text-center" style="padding-top:1rem; margin-left:20px">
+                                <div class="col-md-2" style="padding-top:1rem; padding-left:4rem;">
                                     <p class="fs-4">{{ $item['status'] }}</p>
                                 </div>
                             </div>
